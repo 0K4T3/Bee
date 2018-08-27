@@ -22,4 +22,12 @@
 	version="4.0"
 	metadata-complete="true">
 
+    <servlet>
+        <servlet-name>LoginServlet</servlet-name>
+        <servlet-class>Bee.LoginServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>LoginServlet</servlet-name>
+        <url-mapping>/Login</url-mapping>
+    </servlet-mapping>
 </web-app>
