@@ -1,0 +1,31 @@
+.main {
+    align-content: center;
+    background: url(../img/login-page.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100%;
+}
+
+.what {
+    margin-top: 50px;
+    margin-bottom: 50px;
+    background-color: #f0f0f0;
+    background-size: cover;
+}
+
+.about {
+    align-content: center;
+    background: url(../img/about-page.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100%;
+}
+
+.footer {
+    margin-top: 7px;
+    margin-bottom: 7px;
+}
+
+#AppName {
+    color: #20a9e4;
+}
