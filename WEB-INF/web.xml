@@ -28,6 +28,15 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
-        <url-mapping>/Login</url-mapping>
+        <url-pattern>/Login</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>MainMenuServlet</servlet-name>
+        <servlet-class>Bee.MainMenuServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>MainMenuServlet</servlet-name>
+        <url-pattern>/MainMenu</url-pattern>
     </servlet-mapping>
 </web-app>

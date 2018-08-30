@@ -6,7 +6,7 @@ import javax.servlet.http.*;
 
 public class LoginServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        response.sendRedirect("Login.jsp");
+        response.sendRedirect("login.jsp");
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -27,18 +27,19 @@ public class LoginServlet extends HttpServlet {
                     session = request.getSession(true);
                 }
 
+                session.setAttribute("login", true);
                 request.setAttribute("userbean", ub);
                 rd = request.getRequestDispatcher("mainmenu.jsp");
             } else {
                 request.setAttribute("error", "Login failed.");
                 rd = request.getRequestDispatcher("login.jsp");
             }
-
-            rd.forward(request, response);
         } catch (Exception e) {
             e.printStackTrace();
-            request.getRequestDispatcher("Exception.jsp").forward(request, response);
+            rd = request.getRequestDispatcher("exception.jsp");
         }
+
+        rd.forward(request, response);
     }
 
     public boolean hasSession(HttpServletRequest req) {

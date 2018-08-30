@@ -12,7 +12,7 @@ public class Authenticator {
         try {
             Class.forName("com.mysql.jdbc.Driver");
             
-            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost/Test", "root", "cham-0430");
+            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost/Bee", "root", "cham-0430");
             Statement st = conn.createStatement();
 
             ResultSet rs = st.executeQuery(createSelectQuery(ub));
@@ -26,6 +26,7 @@ public class Authenticator {
                     resultUb = new UserBean();
                     resultUb.setId(String.valueOf(rs.getInt("id")));
                     resultUb.setName(rs.getString("name"));
+                    resultUb.setAge(String.valueOf(rs.getInt("age")));
                     resultUb.setEmail(rs.getString("email"));
                     resultUb.setPassword(rs.getString("password"));
                     resultUb.setLocation(rs.getString("location"));
@@ -42,7 +43,7 @@ public class Authenticator {
     }
 
     public static String createSelectQuery(UserBean ub) {
-        return "select * from test where name = '" + ub.getName() + "';";
+        return "select * from user where name = '" + ub.getName() + "';";
     }
 
     public static int getResultRows(ResultSet rs) {

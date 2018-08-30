@@ -4,6 +4,7 @@
 HttpSession s = request.getSession();
 if (s.getAttribute("login") == null) response.sendRedirect("UnknownUser.html");
 %>
+<jsp:useBean id="userbean" class="Bee.UserBean" scope="session" />
 <html>
 <head>
     <title>MainMenu</title>
@@ -27,13 +28,13 @@ if (s.getAttribute("login") == null) response.sendRedirect("UnknownUser.html");
                 <div class="panel panel-info" id="userinfo-panel">
                     <div class="row" id="username-row">
                         <div class="col-xs-8 col-xs-offset-2 text-center">
-                            <h3><%= s.getAttribute("name") %></h3>
+                            <h3><jsp:getProperty name="userbean" property="name" /></h3>
                         </div>
                     </div>  <!-- username-row -->
                     <div class="row voffset10" id="userimg-row">
                         <div class="col-xs-8 col-xs-offset-2 text-center panel panel-default">
                             <div class="row">
-                                <a href="/myapp/Profile.html"><img class="col-xs-10 col-xs-offset-1 text-center voffset10" src="media/res/user.png" width="100" height="100"></a>
+                                <a href="/myapp/Profile.html"><img class="col-xs-10 col-xs-offset-1 text-center voffset10" src="media/img/user.png" width="100" height="100"></a>
                             </div>
                         </div>
                     </div>  <!-- userimg-row -->
@@ -44,22 +45,22 @@ if (s.getAttribute("login") == null) response.sendRedirect("UnknownUser.html");
                                     <tr>
                                         <td width="100"><h5>ID</h5></td>
                                         <td width="100"><h5>:</h5></td>
-                                        <td><h5><span name="userID"><%= s.getAttribute("id") %></span></h5></td>
+                                        <td><h5><span name="userID"><jsp:getProperty name="userbean" property="id" /></span></h5></td>
                                     </tr>
                                     <tr>
                                         <td width="100"><h5>Sex</h5></td>
                                         <td width="100"><h5>:</h5></td>
-                                        <td><h5><span name="userSex"><%= s.getAttribute("sex") %></span></h5></td>
+                                        <td><h5><span name="userSex"><jsp:getProperty name="userbean" property="sex" /></span></h5></td>
                                     </tr>
                                     <tr>
                                         <td width="100"><h5>Age</h5></td>
                                         <td width="100"><h5>:</h5></td>
-                                        <td><h5><span name="userAge"><%= s.getAttribute("age") %></span></h5></td>
+                                        <td><h5><span name="userAge"><jsp:getProperty name="userbean" property="age" /></span></h5></td>
                                     </tr>
                                     <tr>
-                                        <td width="100"><h5>Country</h5></td>
+                                        <td width="100"><h5>Location</h5></td>
                                         <td width="100"><h5>:</h5></td>
-                                        <td><h5><span name="userCountry"><%= s.getAttribute("country") %></span></h5></td>
+                                        <td><h5><span name="userLocation"><jsp:getProperty name="userbean" property="location" /></span></h5></td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -88,7 +89,7 @@ if (s.getAttribute("login") == null) response.sendRedirect("UnknownUser.html");
                             <ul class="media-list">
                                 <li class="media">
                                     <a class="media-left" href="#">
-                                        <img src="media/res/user.png" width="30" height="30">
+                                        <img src="media/img/user.png" width="30" height="30">
                                     </a>
                                     <div class="media-body">
                                         <h3 class="media-heading">Title</h3>
