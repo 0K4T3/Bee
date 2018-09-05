@@ -1,31 +1,31 @@
 <html>
 <head>
-	<title> Test </title>
+	<title> Login </title>
 	<link href="media/css/Login.css" rel="stylesheet">
 	<link href="media/css/offset.css" rel="stylesheet">
 	<link href="media/bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet">
 	<link href="media/css/bs-button-style.css" rel="stylesheet">
     <script src="media/js/jquery-3.3.1.min.js"></script>
     <script>
-        $(function() {
-            $("#header").load("header.html");
-        });
+      $(function() {
+        $("#header").load("header.html");
+      });
     </script>
 </head> 
 <body>
-    <div id="header"></div>
+  <div id="header"></div>
 
 	<div class="main" align="center">
 		<div class="container">
-            <div class="row voffset20" name="InputForm" id="InputForm">
+      <div class="row voffset20" name="InputForm" id="InputForm">
 				<div class="col-xs-4 col-xs-offset-4 text-center">
 					<div class="panel panel-primary voffset150">
 						<div class="row" name="AppName">
 							<div class="col-xs-10 col-xs-offset-1 text-center">
-								<h1 id="AppName">App Name</h1>
+								<h1 id="AppName">Bee</h1>
 							</div>
 						</div>
-                        <div class="alert alert-danger col-xs-10 col-xs-offset-1" role="alert">${error}</div>
+              ${error}
 					    <form class="row panel-body voffset15" action="Login" method="POST">
 							<input type="text" class="col-xs-8 col-xs-offset-2" placeholder="Username" name="username">
 							<input type="password" class="col-xs-8 col-xs-offset-2" placeholder="Password" name="password">
