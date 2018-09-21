@@ -1,6 +1,10 @@
 package Bee;
 
-import java.sql.*;
+import java.sql.SQLException;
+import java.sql.Connection;
+import java.sql.Statement;
+import java.sql.ResultSet;
+import java.sql.DriverManager;
 
 public class Authenticator {
   private static UserBean resultUb;
@@ -20,17 +24,16 @@ public class Authenticator {
       if (getResultRows(rs) == 0) return false;
 
       while (rs.next()) {
-        if (ub.getPassword().equals(rs.getString("password"))) {
+        if (SHA256.execute(ub.getPassword()).equals(rs.getString("password"))) {
           okFlag = true;
 
           resultUb = new UserBean();
-          resultUb.setId(String.valueOf(rs.getInt("id")));
+          resultUb.setId(rs.getInt("id"));
           resultUb.setName(rs.getString("name"));
-          resultUb.setAge(String.valueOf(rs.getInt("age")));
+          resultUb.setAge(rs.getInt("age"));
           resultUb.setEmail(rs.getString("email"));
           resultUb.setPassword(rs.getString("password"));
           resultUb.setLocation(rs.getString("location"));
-          resultUb.setSex(rs.getString("sex"));
 
           break;
         }

@@ -25,7 +25,7 @@
 								<h1 id="AppName">Bee</h1>
 							</div>
 						</div>
-              ${error}
+            <span class="label label-danger">${error}</span>
 					    <form class="row panel-body voffset15" action="Login" method="POST">
 							<input type="text" class="col-xs-8 col-xs-offset-2" placeholder="Username" name="username">
 							<input type="password" class="col-xs-8 col-xs-offset-2" placeholder="Password" name="password">
@@ -34,7 +34,7 @@
 							<div class="row" name="optional">
 								<div class="text-center">
 									<span class="row text-center">
-										<a class="col-xs-6" href="Regist.html">Create Account</a>
+										<a class="col-xs-6" href="regist.jsp">Create Account</a>
 										<a class="col-xs-6" href="forgot.html">Forgot the password?</a>
 									</span>
 								</div>

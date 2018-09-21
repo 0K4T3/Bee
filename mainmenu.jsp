@@ -1,23 +1,37 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@ page import="javax.servlet.http.HttpSession" %>
+<%@ page import="java.util.List" %>
+<%@ page import="java.util.ArrayList" %>
 <% 
-HttpSession s = request.getSession();
-if (s.getAttribute("login") == null) response.sendRedirect("UnknownUser.html");
+  HttpSession s = request.getSession();
+  if (s.getAttribute("login") == null) response.sendRedirect("UnknownUser.html");
 %>
 <jsp:useBean id="userbean" class="Bee.UserBean" scope="session" />
+<%
+  Bee.ContributionAccessor ca = new Bee.ContributionAccessor();
+  ca.execute();
+  List<Bee.Contribution> contributionList = ca.getContributionList();
+%>
 <html>
 <head>
-    <title>MainMenu</title>
-    <link href="media/css/Login.css" rel="stylesheet">
+  <title>MainMenu</title>
+  <link href="media/css/Login.css" rel="stylesheet">
 	<link href="media/css/offset.css" rel="stylesheet">
 	<link href="media/bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet">
 	<link href="media/css/bs-button-style.css" rel="stylesheet">
-    <script src="media/js/jquery-3.3.1.min.js"></script>
-    <script>
-        $(function() {
-            $("#header").load("header.html");
-        });
-    </script>
+  <link rel="stylesheet" href="media/DataTables/datatables.min.css"/>
+  <script src="media/js/jquery-3.3.1.min.js"></script>
+  <script src="media/DataTables/datatables.min.js"></script>
+  <script>
+    $(function() {
+      $("#header").load("header.html");
+    });
+  </script>
+  <script>
+    $(function() {
+      $("#contribution-table").DataTable();
+    });
+  </script>
 </head>
 <body>
     <div id="header"></div>
@@ -48,11 +62,6 @@ if (s.getAttribute("login") == null) response.sendRedirect("UnknownUser.html");
                                         <td><h5><span name="userID"><jsp:getProperty name="userbean" property="id" /></span></h5></td>
                                     </tr>
                                     <tr>
-                                        <td width="100"><h5>Sex</h5></td>
-                                        <td width="100"><h5>:</h5></td>
-                                        <td><h5><span name="userSex"><jsp:getProperty name="userbean" property="sex" /></span></h5></td>
-                                    </tr>
-                                    <tr>
                                         <td width="100"><h5>Age</h5></td>
                                         <td width="100"><h5>:</h5></td>
                                         <td><h5><span name="userAge"><jsp:getProperty name="userbean" property="age" /></span></h5></td>
@@ -73,12 +82,28 @@ if (s.getAttribute("login") == null) response.sendRedirect("UnknownUser.html");
                     </div>  <!-- infomore-row -->
                 </div>  <!-- userinfo-panel -->
             </div>  <!-- userinfo-col -->
+            
             <div class="col-xs-7" id="maincontents-col">
                 <div class="panel panel-info">
                     <div class="panel-body">
+                      <table id="contribution-table">
+                        <thead>
+                          <tr><td>title</td></tr>
+                        </thead>
+                        <tbody>
+                          <%
+                            for (Bee.Contribution c : contributionList) {
+                          %>
+                            <tr><td><%= c.getTitle() %></td></tr>
+                          <%
+                            }
+                          %>
+                        </tbody>
+                      </table>
                     </div>
                 </div>
             </div>  <!-- maincontents-col -->
+
             <div class="col-xs-3" id="message-col">
                 <div class="panel panel-info">
                     <div class="panel-heading">

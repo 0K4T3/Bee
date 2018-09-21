@@ -1,52 +1,55 @@
 package Bee;
 
-import java.io.*;
-import javax.servlet.*;
-import javax.servlet.http.*;
+import java.io.IOException;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 public class LoginServlet extends HttpServlet {
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        response.sendRedirect("login.jsp");
-    }
+  protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    response.sendRedirect("login.jsp");
+  }
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        UserBean ub = new UserBean();
-        ub.setName(request.getParameter("username"));
-        ub.setPassword(request.getParameter("password"));
+  protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    UserBean ub = new UserBean();
+    ub.setName(request.getParameter("username"));
+    ub.setPassword(request.getParameter("password"));
 
-        HttpSession session = null;
-        RequestDispatcher rd = null;
+    HttpSession session = null;
+    RequestDispatcher rd = null;
 
-        try {
-            if (Authenticator.execute(ub)) {
-                ub = Authenticator.getUserBean();
-                
-                if (hasSession(request)) {
-                    session = request.getSession(false);
-                } else {
-                    session = request.getSession(true);
-                }
-
-                session.setAttribute("login", true);
-                request.setAttribute("userbean", ub);
-                rd = request.getRequestDispatcher("mainmenu.jsp");
-            } else {
-                request.setAttribute("error", "Login failed.");
-                rd = request.getRequestDispatcher("login.jsp");
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            rd = request.getRequestDispatcher("exception.jsp");
+    try {
+      if (Authenticator.execute(ub)) {
+        ub = Authenticator.getUserBean();
+        
+        if (hasSession(request)) {
+          session = request.getSession(false);
+        } else {
+          session = request.getSession(true);
         }
 
-        rd.forward(request, response);
+        session.setAttribute("login", true);
+        request.setAttribute("userbean", ub);
+        rd = request.getRequestDispatcher("mainmenu.jsp");
+      } else {
+        request.setAttribute("error", "Login failed.");
+        rd = request.getRequestDispatcher("login.jsp");
+      }
+    } catch (Exception e) {
+      e.printStackTrace();
+      rd = request.getRequestDispatcher("exception.jsp");
     }
 
-    public boolean hasSession(HttpServletRequest req) {
-        HttpSession session = null;
-        session = req.getSession(false);
-    
-        return session != null;
-    }
+    rd.forward(request, response);
+  }
+
+  public boolean hasSession(HttpServletRequest req) {
+    HttpSession session = null;
+    session = req.getSession(false);
+
+    return session != null;
+  }
 }
 

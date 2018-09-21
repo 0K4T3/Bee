@@ -39,4 +39,13 @@
         <servlet-name>MainMenuServlet</servlet-name>
         <url-pattern>/MainMenu</url-pattern>
     </servlet-mapping>
+
+    <servlet>
+      <servlet-name>Regist</servlet-name>
+      <servlet-class>Bee.RegistServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+      <servlet-name>Regist</servlet-name>
+      <url-pattern>/Regist</url-pattern>
+    </servlet-mapping>
 </web-app>

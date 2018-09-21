@@ -4,41 +4,50 @@ import java.util.*;
 import java.sql.*;
 
 public class ContributionAccessor {
-  private static List<Contribution> contributionList;
+  private Connection con;
+  private List<Contribution> contributionList;
 
-  public static boolean execute() {
+  public ContributionAccessor() {
     contributionList = new ArrayList<>();
 
     try {
       Class.forName("com.mysql.jdbc.Driver");
-      Connection conn = DriverManager.getConnection("jdbc:mysql://localhost/Bee", "bee", "password");
-      Statement st = conn.createStatement();
+      con = DriverManager.getConnection("jdbc:mysql://localhost/Bee", "bee", "password");
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+  }
+
+  public boolean execute() {
+    try {
+      Statement st = con.createStatement();
 
       ResultSet rs = st.executeQuery(createSelectQuery());
 
       while (rs.next()) {
         Contribution c = new Contribution();
-        c.setId(String.valueOf(rs.getInt("id")));
-        c.setContributorId(String.valueOf(rs.getInt("contributor_id")));
+        c.setId(rs.getInt("id"));
+        c.setContributorId(rs.getInt("contributor_id"));
+        c.setTitle(rs.getString("title"));
         c.setText(rs.getString("text"));
-        c.setOfferNum(String.valueOf(rs.getInt("offer_num")));
+        c.setOfferNum(rs.getInt("offer_num"));
         c.setGitUrl(rs.getString("git_url"));
 
         contributionList.add(c);
       }
     } catch (Exception e) {
-        e.printStackTrace();
-        return false;
+      e.printStackTrace();
+      return false;
     }
 
     return true;
   }
 
-  public static String createSelectQuery() {
+  public String createSelectQuery() {
     return "select * from contribution;";
   }
 
-  public static List<Contribution> getContributionList() {
+  public List<Contribution> getContributionList() {
     return contributionList;
   }
 }
